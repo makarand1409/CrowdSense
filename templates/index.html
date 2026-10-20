@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CrowdSense | Mall Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">C</span><span>Crowd<span>Sense</span></span></div>
+      <div class="sidebar-label">OPERATIONS</div>
+      <nav class="primary-nav"><a class="active" href="#overview" data-target="overview"><span>◈</span> Overview</a><a href="#live-traffic" data-target="live-traffic"><span>◫</span> Live traffic</a><a href="#forecasts" data-target="forecasts"><span>◌</span> Forecasts</a><a href="#reports" data-target="reports"><span>⌁</span> Reports</a></nav>
+      <div class="sidebar-label">SYSTEM</div>
+      <nav class="secondary-nav"><a href="#sensor-fleet" data-target="sensor-fleet"><span>⚙</span> Sensor fleet</a><a href="#help-center" data-target="help-center"><span>?</span> Help center</a></nav>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div><div class="eyebrow">PROPERTY INTELLIGENCE / OVERVIEW</div><h1>Mall <span class="verified">✓</span></h1></div><div class="top-actions"><div class="clock"><span class="live-dot"></span><span id="live-clock">--:--:--</span><small>LOCAL TIME</small></div><button class="date-chip" id="today-date" title="Refresh dashboard">--</button><button class="icon-button" id="refresh-button" title="Refresh dashboard" aria-label="Refresh dashboard">⌁</button><button class="icon-button" id="menu-button" title="Open dashboard actions" aria-label="Open dashboard actions">⋮</button></div></header>
+      <section class="status-strip"><div class="strip-item"><span class="sensor-icon">⌁</span><div><small>SENSOR NETWORK</small><strong><i class="status-dot"></i><span id="sensor-status">Online</span></strong></div></div><div class="strip-divider"></div><div class="strip-item"><span class="strip-icon">↗</span><div><small>LIVE CAPTURE</small><strong id="capture-rate">24.8 <em>visitors / min</em></strong></div></div><div class="strip-divider"></div><div class="strip-item"><span class="strip-icon purple">◷</span><div><small>DATA SYNC</small><strong>Real-time <em class="green-text">● Connected</em></strong></div></div><div class="strip-end">Last updated <strong id="last-updated">just now</strong> <span>↻</span></div></section>
+      <div class="content">
+        <section class="hero-grid" id="overview">
+          <article class="card hero-card" id="hero-card"><div class="card-header"><div><div class="eyebrow cyan">TODAY'S FOOTFALL</div><h2 id="total-counter">0</h2></div><div class="card-menu">···</div></div><div class="hero-footer"><span class="trend up"> </span><span class="muted-sep"></span><span class="muted"></span></div><div class="hero-spark"><svg viewBox="0 0 360 60" preserveAspectRatio="none"><path d="M0 48 C30 44 34 35 58 40 S94 20 116 31 S140 40 162 22 S188 30 207 18 S244 32 263 14 S293 22 315 9 S344 13 360 3" fill="none"/></svg></div></article>
+          <article class="card prediction-card" id="forecasts"><div class="card-header"><div><div class="eyebrow purple-text">NEXT HOUR FORECAST</div><h3>ML prediction</h3></div><span class="model-badge">RF MODEL</span></div><div class="prediction-number"><strong id="prediction">—</strong><span>visitors</span></div><div class="prediction-meta"><span id="prediction-window">Next hour</span><span class="confidence"><i></i><span id="confidence">—</span>% confidence</span></div><div class="prediction-line"><span></span></div><p>Based on live conditions, historical patterns and <b>Sunny</b> weather.</p></article>
+          <article class="card peak-card"><div class="card-header"><div><div class="eyebrow amber">PEAK HOURS</div><h3>Today's demand windows</h3></div><span class="card-menu">···</span></div><div id="peak-hours" class="peak-list"></div></article>
+        </section>
+        <section class="section-heading" id="live-traffic"><div><div class="eyebrow">REAL-TIME MONITORING</div><h2>Live visitor traffic</h2></div><div class="range-tabs"><button class="active" data-range="today">Today</button><button data-range="yesterday">Yesterday</button><button data-range="7days">7 days</button></div></section>
+        <section class="monitor-grid" id="reports">
+          <article class="card chart-card traffic-card"><div class="card-header"><div><h3>Visitor activity</h3><p>Real-time sensor detections across all entrances</p></div><div class="legend"><i></i>Live stream <span class="live-pill">● LIVE</span></div></div><div class="chart-wrap large"><canvas id="live-chart"></canvas></div><div class="chart-footer"><span><b id="live-count">0</b> detections today</span><span>Last 20 readings <b class="cyan-text">↗ 8.6%</b></span></div></article>
+          <article class="card chart-card hourly-card"><div class="card-header"><div><h3>Hourly pattern</h3><p>Average visitor volume by hour</p></div><span class="card-menu">···</span></div><div class="chart-wrap"><canvas id="hourly-chart"></canvas></div><div class="chart-note"><span class="dot cyan-bg"></span> Current hour <strong id="current-hour">--:00</strong></div></article>
+        </section>
+        <section class="bottom-grid">
+          <article class="card chart-card weekly-card"><div class="card-header"><div><h3>Weekly comparison</h3><p>Traffic performance over the last 7 days</p></div><div class="legend"><i class="purple-dot"></i>This week <i class="gray-dot"></i>Last week</div></div><div class="chart-wrap"><canvas id="weekly-chart"></canvas></div></article>
+          <article class="card chart-card weather-card"><div class="card-header"><div><h3>Weather impact</h3><p>Average traffic by condition</p></div><span class="card-menu">···</span></div><div class="chart-wrap weather-wrap"><canvas id="weather-chart"></canvas></div><div class="weather-foot"><span>☀ <b>Sunny</b></span><span>☁ <b>Cloudy</b></span><span>☂ <b>Rainy</b></span></div></article>
+          <article class="card activity-card" id="sensor-fleet"><div class="card-header"><div><div class="eyebrow">SENSOR ACTIVITY</div><h3>Live detections</h3></div><span class="live-pill">● LIVE</span></div><div id="activity-feed" class="activity-feed"><div class="empty-feed">Waiting for sensor activity…</div></div><button class="view-all" id="view-all-activity">View all activity <span>→</span></button></article>
+        </section>
+        <section class="summary-row"><article class="stat-card"><span class="stat-icon cyan-bg">↗</span><div><small>TOTAL TODAY</small><strong id="stat-total">0</strong><em class="up"></em></div></article><article class="stat-card"><span class="stat-icon purple-bg">◷</span><div><small>AVG. PER HOUR</small><strong id="stat-average">—</strong><em>visitors</em></div></article><article class="stat-card"><span class="stat-icon amber-bg">⌁</span><div><small>PEAK HOUR</small><strong id="stat-peak">—</strong><em id="stat-peak-count">— visitors</em></div></article><article class="stat-card"><span class="stat-icon green-bg">★</span><div><small>BUSIEST DAY</small><strong id="stat-busiest">—</strong><em>This week</em></div></article></section>
+        <section class="card dataset-card" id="dataset-preview"><div class="card-header"><div><div class="eyebrow cyan">DATASET</div><h3>Footfall data sample</h3><p>Recent rows from the mall footfall dataset</p></div><span class="dataset-count" id="dataset-count">— rows</span></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Day</th><th>Time</th><th>Weather</th><th>Holiday</th><th>Weekend</th><th>Visitors</th></tr></thead><tbody id="dataset-table-body"><tr><td colspan="7" class="table-empty">Loading dataset…</td></tr></tbody></table></div></section>
+        <footer>© 2026 CrowdSense <span>•</span> Mall <span>•</span> Data refreshes automatically</footer>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
